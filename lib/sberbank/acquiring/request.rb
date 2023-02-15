@@ -26,7 +26,7 @@ module Sberbank
 
       def perform
         uri = build_uri
-        Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        Net::HTTP.start(uri.host, uri.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
           @http_request = Net::HTTP::Post.new(uri)
           @http_request['Content-Type'] = 'application/x-www-form-urlencoded'
           @http_request.body = URI.encode_www_form(params)
